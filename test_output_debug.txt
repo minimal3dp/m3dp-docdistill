@@ -1,0 +1,357 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.9, pytest-9.0.1, pluggy-1.6.0 -- /Users/wilsonm/development/m3dp-docdistill/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /Users/wilsonm/development/m3dp-docdistill
+configfile: pyproject.toml
+plugins: mock-3.15.1
+collecting ... collected 7 items
+
+tests/test_cli.py::test_help App Help Output:                         
+ Usage: convert         
+ [OPTIONS] PATH         
+                        
+ Convert PDF(s) to      
+ Markdown.              
+                        
+ This command processes 
+ a single PDF file or a 
+ directory of PDF       
+ files. It converts the 
+ content to Markdown    
+ format and optionally  
+ creates a compressed   
+ version optimized for  
+ Large Language Models  
+ (LLMs).                
+ Args:     path (Path): 
+ The file path to a     
+ single PDF or a        
+ directory containing   
+ PDFs.     ocr (bool):  
+ If True, enables       
+ Optical Character      
+ Recognition (OCR) for  
+ scanned documents.     
+ Requires Tesseract to  
+ be installed. Defaults 
+ to False.     compress 
+ (bool): If True,       
+ generates an           
+ additional compressed  
+ Markdown file          
+ with stop words and    
+ punctuation removed.   
+ Defaults to False.     
+ output                 
+ (Optional[Path]): The  
+ directory where output 
+ files will be saved.   
+ If not provided, files 
+ are saved in the same  
+ directory as the       
+ source.                
+                        
+╭─ Arguments ──────────╮
+│ *    p…      PA  Pa… │
+│              TH  to  │
+│                  a   │
+│                  PDF │
+│                  fi… │
+│                  or  │
+│                  a   │
+│                  di… │
+│                  of  │
+│                  PD… │
+│                  [r… │
+╰──────────────────────╯
+╭─ Options ────────────╮
+│ --…              En… │
+│                  OCR │
+│                  for │
+│                  sc… │
+│                  do… │
+│                  (r… │
+│                  Te… │
+│ --…  -c          Ge… │
+│                  a   │
+│                  co… │
+│                  ve… │
+│                  for │
+│                  LL… │
+│ --…  -o      PA  Cu… │
+│              TH  ou… │
+│                  di… │
+│                  De… │
+│                  to  │
+│                  so… │
+│                  di… │
+│ --…              In… │
+│                  co… │
+│                  for │
+│                  the │
+│                  cu… │
+│                  sh… │
+│ --…              Sh… │
+│                  co… │
+│                  for │
+│                  the │
+│                  cu… │
+│                  sh… │
+│                  to  │
+│                  co… │
+│                  it  │
+│                  or  │
+│                  cu… │
+│                  the │
+│                  in… │
+│ --…              Sh… │
+│                  th… │
+│                  me… │
+│                  and │
+│                  ex… │
+╰──────────────────────╯
+
+
+Command Help Output:                         
+ Usage: convert         
+ [OPTIONS] PATH         
+                        
+ Convert PDF(s) to      
+ Markdown.              
+                        
+ This command processes 
+ a single PDF file or a 
+ directory of PDF       
+ files. It converts the 
+ content to Markdown    
+ format and optionally  
+ creates a compressed   
+ version optimized for  
+ Large Language Models  
+ (LLMs).                
+ Args:     path (Path): 
+ The file path to a     
+ single PDF or a        
+ directory containing   
+ PDFs.     ocr (bool):  
+ If True, enables       
+ Optical Character      
+ Recognition (OCR) for  
+ scanned documents.     
+ Requires Tesseract to  
+ be installed. Defaults 
+ to False.     compress 
+ (bool): If True,       
+ generates an           
+ additional compressed  
+ Markdown file          
+ with stop words and    
+ punctuation removed.   
+ Defaults to False.     
+ output                 
+ (Optional[Path]): The  
+ directory where output 
+ files will be saved.   
+ If not provided, files 
+ are saved in the same  
+ directory as the       
+ source.                
+                        
+╭─ Arguments ──────────╮
+│ *    p…      PA  Pa… │
+│              TH  to  │
+│                  a   │
+│                  PDF │
+│                  fi… │
+│                  or  │
+│                  a   │
+│                  di… │
+│                  of  │
+│                  PD… │
+│                  [r… │
+╰──────────────────────╯
+╭─ Options ────────────╮
+│ --…              En… │
+│                  OCR │
+│                  for │
+│                  sc… │
+│                  do… │
+│                  (r… │
+│                  Te… │
+│ --…  -c          Ge… │
+│                  a   │
+│                  co… │
+│                  ve… │
+│                  for │
+│                  LL… │
+│ --…  -o      PA  Cu… │
+│              TH  ou… │
+│                  di… │
+│                  De… │
+│                  to  │
+│                  so… │
+│                  di… │
+│ --…              In… │
+│                  co… │
+│                  for │
+│                  the │
+│                  cu… │
+│                  sh… │
+│ --…              Sh… │
+│                  co… │
+│                  for │
+│                  the │
+│                  cu… │
+│                  sh… │
+│                  to  │
+│                  co… │
+│                  it  │
+│                  or  │
+│                  cu… │
+│                  the │
+│                  in… │
+│ --…              Sh… │
+│                  th… │
+│                  me… │
+│                  and │
+│                  ex… │
+╰──────────────────────╯
+
+
+PASSED
+tests/test_cli.py::test_invoke_direct Direct Invoke Output: Processing test.pdf...
+  Saved: 
+/private/var/folders/ts/
+_kwyvb2s6rjfhrhv4m58gd94
+0000gn/T/pytest-of-wilso
+nm/pytest-4/test_invoke_
+direct0/test.md
+
+Direct Invoke Exit Code: 0
+PASSED
+tests/test_cli.py::test_convert_file_success Output: 
+FAILED
+tests/test_cli.py::test_convert_file_not_found FAILED
+tests/test_cli.py::test_convert_not_pdf FAILED
+tests/test_cli.py::test_convert_with_compression Output: 
+FAILED
+tests/test_cli.py::test_convert_directory FAILED
+
+=================================== FAILURES ===================================
+__________________________ test_convert_file_success ___________________________
+
+mock_converter = <MagicMock name='PDFConverter' id='4443001184'>
+tmp_path = PosixPath('/private/var/folders/ts/_kwyvb2s6rjfhrhv4m58gd940000gn/T/pytest-of-wilsonm/pytest-4/test_convert_file_success0')
+
+    def test_convert_file_success(mock_converter, tmp_path):
+        # Create a dummy PDF file
+        pdf_file = tmp_path / "test.pdf"
+        pdf_file.touch()
+    
+        # Mock converter instance
+        mock_instance = mock_converter.return_value
+        mock_instance.to_markdown.return_value = "# Markdown Content"
+    
+        result = runner.invoke(app, ["convert", str(pdf_file)])
+    
+        print(f"Output: {result.stdout}")
+>       assert result.exit_code == 0
+E       assert 2 == 0
+E        +  where 2 = <Result SystemExit(2)>.exit_code
+
+tests/test_cli.py:49: AssertionError
+_________________________ test_convert_file_not_found __________________________
+
+    def test_convert_file_not_found():
+        result = runner.invoke(app, ["convert", "non_existent.pdf"])
+>       assert result.exit_code == 1
+E       assert 2 == 1
+E        +  where 2 = <Result SystemExit(2)>.exit_code
+
+tests/test_cli.py:63: AssertionError
+_____________________________ test_convert_not_pdf _____________________________
+
+tmp_path = PosixPath('/private/var/folders/ts/_kwyvb2s6rjfhrhv4m58gd940000gn/T/pytest-of-wilsonm/pytest-4/test_convert_not_pdf0')
+
+    def test_convert_not_pdf(tmp_path):
+        txt_file = tmp_path / "test.txt"
+        txt_file.touch()
+    
+        result = runner.invoke(app, ["convert", str(txt_file)])
+>       assert result.exit_code == 1
+E       assert 2 == 1
+E        +  where 2 = <Result SystemExit(2)>.exit_code
+
+tests/test_cli.py:71: AssertionError
+________________________ test_convert_with_compression _________________________
+
+mock_converter = <MagicMock name='PDFConverter' id='4443385264'>
+mock_compressor = <MagicMock name='PromptCompressor' id='4443381520'>
+tmp_path = PosixPath('/private/var/folders/ts/_kwyvb2s6rjfhrhv4m58gd940000gn/T/pytest-of-wilsonm/pytest-4/test_convert_with_compression0')
+
+    def test_convert_with_compression(mock_converter, mock_compressor, tmp_path):
+        pdf_file = tmp_path / "test.pdf"
+        pdf_file.touch()
+    
+        mock_conv_instance = mock_converter.return_value
+        mock_conv_instance.to_markdown.return_value = "Original Content"
+    
+        mock_comp_instance = mock_compressor.return_value
+        mock_comp_instance.compress.return_value = "Compressed Content"
+    
+        result = runner.invoke(app, ["convert", str(pdf_file), "--compress"])
+    
+        print(f"Output: {result.stdout}")
+>       assert result.exit_code == 0
+E       assert 2 == 0
+E        +  where 2 = <Result SystemExit(2)>.exit_code
+
+tests/test_cli.py:87: AssertionError
+____________________________ test_convert_directory ____________________________
+
+mock_converter = <MagicMock name='PDFConverter' id='4443457392'>
+tmp_path = PosixPath('/private/var/folders/ts/_kwyvb2s6rjfhrhv4m58gd940000gn/T/pytest-of-wilsonm/pytest-4/test_convert_directory0')
+
+    def test_convert_directory(mock_converter, tmp_path):
+        # Create dir with 2 PDFs
+        d = tmp_path / "pdfs"
+        d.mkdir()
+        (d / "p1.pdf").touch()
+        (d / "p2.pdf").touch()
+    
+        mock_instance = mock_converter.return_value
+        mock_instance.to_markdown.return_value = "Content"
+    
+        result = runner.invoke(app, ["convert", str(d)])
+    
+>       assert result.exit_code == 0
+E       assert 2 == 0
+E        +  where 2 = <Result SystemExit(2)>.exit_code
+
+tests/test_cli.py:106: AssertionError
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_convert_file_success - assert 2 == 0
+ +  where 2 = <Result SystemExit(2)>.exit_code
+FAILED tests/test_cli.py::test_convert_file_not_found - assert 2 == 1
+ +  where 2 = <Result SystemExit(2)>.exit_code
+FAILED tests/test_cli.py::test_convert_not_pdf - assert 2 == 1
+ +  where 2 = <Result SystemExit(2)>.exit_code
+FAILED tests/test_cli.py::test_convert_with_compression - assert 2 == 0
+ +  where 2 = <Result SystemExit(2)>.exit_code
+FAILED tests/test_cli.py::test_convert_directory - assert 2 == 0
+ +  where 2 = <Result SystemExit(2)>.exit_code
+=================== 5 failed, 2 passed, 5 warnings in 0.25s ====================
+sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute

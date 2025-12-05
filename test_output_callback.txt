@@ -1,0 +1,216 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.9, pytest-9.0.1, pluggy-1.6.0 -- /Users/wilsonm/development/m3dp-docdistill/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /Users/wilsonm/development/m3dp-docdistill
+configfile: pyproject.toml
+plugins: mock-3.15.1
+collecting ... collected 7 items
+
+tests/test_cli.py::test_help App Help Output:                         
+ Usage: root [OPTIONS]  
+ COMMAND [ARGS]...      
+                        
+ Convert PDFs to        
+ Markdown and           
+ optionally compress    
+ them for LLMs.         
+                        
+╭─ Options ────────────╮
+│ --in…          Inst… │
+│                comp… │
+│                for   │
+│                the   │
+│                curr… │
+│                shel… │
+│ --sh…          Show  │
+│                comp… │
+│                for   │
+│                the   │
+│                curr… │
+│                shel… │
+│                to    │
+│                copy  │
+│                it or │
+│                cust… │
+│                the   │
+│                inst… │
+│ --he…          Show  │
+│                this  │
+│                mess… │
+│                and   │
+│                exit. │
+╰──────────────────────╯
+╭─ Commands ───────────╮
+│ convert   Convert    │
+│           PDF(s) to  │
+│           Markdown.  │
+╰──────────────────────╯
+
+
+Command Help Output:                         
+ Usage: root convert    
+ [OPTIONS] PATH         
+                        
+ Convert PDF(s) to      
+ Markdown.              
+                        
+ This command processes 
+ a single PDF file or a 
+ directory of PDF       
+ files. It converts the 
+ content to Markdown    
+ format and optionally  
+ creates a compressed   
+ version optimized for  
+ Large Language Models  
+ (LLMs).                
+ Args:     path (Path): 
+ The file path to a     
+ single PDF or a        
+ directory containing   
+ PDFs.     ocr (bool):  
+ If True, enables       
+ Optical Character      
+ Recognition (OCR) for  
+ scanned documents.     
+ Requires Tesseract to  
+ be installed. Defaults 
+ to False.     compress 
+ (bool): If True,       
+ generates an           
+ additional compressed  
+ Markdown file          
+ with stop words and    
+ punctuation removed.   
+ Defaults to False.     
+ output                 
+ (Optional[Path]): The  
+ directory where output 
+ files will be saved.   
+ If not provided, files 
+ are saved in the same  
+ directory as the       
+ source.                
+                        
+╭─ Arguments ──────────╮
+│ *    p…      PA  Pa… │
+│              TH  to  │
+│                  a   │
+│                  PDF │
+│                  fi… │
+│                  or  │
+│                  a   │
+│                  di… │
+│                  of  │
+│                  PD… │
+│                  [r… │
+╰──────────────────────╯
+╭─ Options ────────────╮
+│ --…              En… │
+│                  OCR │
+│                  for │
+│                  sc… │
+│                  do… │
+│                  (r… │
+│                  Te… │
+│ --…  -c          Ge… │
+│                  a   │
+│                  co… │
+│                  ve… │
+│                  for │
+│                  LL… │
+│ --…  -o      PA  Cu… │
+│              TH  ou… │
+│                  di… │
+│                  De… │
+│                  to  │
+│                  so… │
+│                  di… │
+│ --…              Sh… │
+│                  th… │
+│                  me… │
+│                  and │
+│                  ex… │
+╰──────────────────────╯
+
+
+PASSED
+tests/test_cli.py::test_invoke_direct Direct Invoke Output: 
+Direct Invoke Exit Code: 2
+PASSED
+tests/test_cli.py::test_convert_file_success Output: Processing test.pdf...
+  Saved: 
+/private/var/folders/ts/
+_kwyvb2s6rjfhrhv4m58gd94
+0000gn/T/pytest-of-wilso
+nm/pytest-5/test_convert
+_file_success0/test.md
+
+PASSED
+tests/test_cli.py::test_convert_file_not_found FAILED
+tests/test_cli.py::test_convert_not_pdf FAILED
+tests/test_cli.py::test_convert_with_compression Output: Processing test.pdf...
+  Saved: 
+/private/var/folders/ts/
+_kwyvb2s6rjfhrhv4m58gd94
+0000gn/T/pytest-of-wilso
+nm/pytest-5/test_convert
+_with_compression0/test.
+md
+  Compressed: 
+/private/var/folders/ts/
+_kwyvb2s6rjfhrhv4m58gd94
+0000gn/T/pytest-of-wilso
+nm/pytest-5/test_convert
+_with_compression0/test_
+compressed.md
+
+PASSED
+tests/test_cli.py::test_convert_directory PASSED
+
+=================================== FAILURES ===================================
+_________________________ test_convert_file_not_found __________________________
+
+    def test_convert_file_not_found():
+        result = runner.invoke(app, ["convert", "non_existent.pdf"])
+        assert result.exit_code == 1
+>       assert "does not exist" in result.stdout
+E       assert 'does not exist' in "Error: Path \n'non_existent.pdf' does \nnot exist.\n"
+E        +  where "Error: Path \n'non_existent.pdf' does \nnot exist.\n" = <Result SystemExit(1)>.stdout
+
+tests/test_cli.py:64: AssertionError
+_____________________________ test_convert_not_pdf _____________________________
+
+tmp_path = PosixPath('/private/var/folders/ts/_kwyvb2s6rjfhrhv4m58gd940000gn/T/pytest-of-wilsonm/pytest-5/test_convert_not_pdf0')
+
+    def test_convert_not_pdf(tmp_path):
+        txt_file = tmp_path / "test.txt"
+        txt_file.touch()
+    
+        result = runner.invoke(app, ["convert", str(txt_file)])
+        assert result.exit_code == 1
+>       assert "File is not a PDF" in result.stdout
+E       AssertionError: assert 'File is not a PDF' in 'Error: File is not a \nPDF.\n'
+E        +  where 'Error: File is not a \nPDF.\n' = <Result SystemExit(1)>.stdout
+
+tests/test_cli.py:72: AssertionError
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_convert_file_not_found - assert 'does not exist' in "Error: Path \n'non_existent.pdf' does \nnot exist.\n"
+ +  where "Error: Path \n'non_existent.pdf' does \nnot exist.\n" = <Result SystemExit(1)>.stdout
+FAILED tests/test_cli.py::test_convert_not_pdf - AssertionError: assert 'File is not a PDF' in 'Error: File is not a \nPDF.\n'
+ +  where 'Error: File is not a \nPDF.\n' = <Result SystemExit(1)>.stdout
+=================== 2 failed, 5 passed, 5 warnings in 0.33s ====================
+sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute

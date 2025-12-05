@@ -1,0 +1,134 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.9, pytest-9.0.1, pluggy-1.6.0 -- /Users/wilsonm/development/m3dp-docdistill/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /Users/wilsonm/development/m3dp-docdistill
+configfile: pyproject.toml
+plugins: mock-3.15.1
+collecting ... collected 5 items
+
+tests/test_cli.py::test_convert_file_success Output: 
+FAILED
+tests/test_cli.py::test_convert_file_not_found FAILED
+tests/test_cli.py::test_convert_not_pdf FAILED
+tests/test_cli.py::test_convert_with_compression Output: 
+FAILED
+tests/test_cli.py::test_convert_directory FAILED
+
+=================================== FAILURES ===================================
+__________________________ test_convert_file_success ___________________________
+
+mock_converter = <MagicMock name='PDFConverter' id='4486468320'>
+tmp_path = PosixPath('/private/var/folders/ts/_kwyvb2s6rjfhrhv4m58gd940000gn/T/pytest-of-wilsonm/pytest-2/test_convert_file_success0')
+
+    def test_convert_file_success(mock_converter, tmp_path):
+        # Create a dummy PDF file
+        pdf_file = tmp_path / "test.pdf"
+        pdf_file.touch()
+    
+        # Mock converter instance
+        mock_instance = mock_converter.return_value
+        mock_instance.to_markdown.return_value = "# Markdown Content"
+    
+        result = runner.invoke(app, ["convert", str(pdf_file)])
+    
+        print(f"Output: {result.stdout}")
+>       assert result.exit_code == 0
+E       assert 2 == 0
+E        +  where 2 = <Result SystemExit(2)>.exit_code
+
+tests/test_cli.py:29: AssertionError
+_________________________ test_convert_file_not_found __________________________
+
+    def test_convert_file_not_found():
+        result = runner.invoke(app, ["convert", "non_existent.pdf"])
+>       assert result.exit_code == 1
+E       assert 2 == 1
+E        +  where 2 = <Result SystemExit(2)>.exit_code
+
+tests/test_cli.py:43: AssertionError
+_____________________________ test_convert_not_pdf _____________________________
+
+tmp_path = PosixPath('/private/var/folders/ts/_kwyvb2s6rjfhrhv4m58gd940000gn/T/pytest-of-wilsonm/pytest-2/test_convert_not_pdf0')
+
+    def test_convert_not_pdf(tmp_path):
+        txt_file = tmp_path / "test.txt"
+        txt_file.touch()
+    
+        result = runner.invoke(app, ["convert", str(txt_file)])
+>       assert result.exit_code == 1
+E       assert 2 == 1
+E        +  where 2 = <Result SystemExit(2)>.exit_code
+
+tests/test_cli.py:51: AssertionError
+________________________ test_convert_with_compression _________________________
+
+mock_converter = <MagicMock name='PDFConverter' id='4476638064'>
+mock_compressor = <MagicMock name='PromptCompressor' id='4486479456'>
+tmp_path = PosixPath('/private/var/folders/ts/_kwyvb2s6rjfhrhv4m58gd940000gn/T/pytest-of-wilsonm/pytest-2/test_convert_with_compression0')
+
+    def test_convert_with_compression(mock_converter, mock_compressor, tmp_path):
+        pdf_file = tmp_path / "test.pdf"
+        pdf_file.touch()
+    
+        mock_conv_instance = mock_converter.return_value
+        mock_conv_instance.to_markdown.return_value = "Original Content"
+    
+        mock_comp_instance = mock_compressor.return_value
+        mock_comp_instance.compress.return_value = "Compressed Content"
+    
+        result = runner.invoke(app, ["convert", str(pdf_file), "--compress"])
+    
+        print(f"Output: {result.stdout}")
+>       assert result.exit_code == 0
+E       assert 2 == 0
+E        +  where 2 = <Result SystemExit(2)>.exit_code
+
+tests/test_cli.py:67: AssertionError
+____________________________ test_convert_directory ____________________________
+
+mock_converter = <MagicMock name='PDFConverter' id='4487831600'>
+tmp_path = PosixPath('/private/var/folders/ts/_kwyvb2s6rjfhrhv4m58gd940000gn/T/pytest-of-wilsonm/pytest-2/test_convert_directory0')
+
+    def test_convert_directory(mock_converter, tmp_path):
+        # Create dir with 2 PDFs
+        d = tmp_path / "pdfs"
+        d.mkdir()
+        (d / "p1.pdf").touch()
+        (d / "p2.pdf").touch()
+    
+        mock_instance = mock_converter.return_value
+        mock_instance.to_markdown.return_value = "Content"
+    
+        result = runner.invoke(app, ["convert", str(d)])
+    
+>       assert result.exit_code == 0
+E       assert 2 == 0
+E        +  where 2 = <Result SystemExit(2)>.exit_code
+
+tests/test_cli.py:86: AssertionError
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_convert_file_success - assert 2 == 0
+ +  where 2 = <Result SystemExit(2)>.exit_code
+FAILED tests/test_cli.py::test_convert_file_not_found - assert 2 == 1
+ +  where 2 = <Result SystemExit(2)>.exit_code
+FAILED tests/test_cli.py::test_convert_not_pdf - assert 2 == 1
+ +  where 2 = <Result SystemExit(2)>.exit_code
+FAILED tests/test_cli.py::test_convert_with_compression - assert 2 == 0
+ +  where 2 = <Result SystemExit(2)>.exit_code
+FAILED tests/test_cli.py::test_convert_directory - assert 2 == 0
+ +  where 2 = <Result SystemExit(2)>.exit_code
+======================== 5 failed, 5 warnings in 0.22s =========================
+sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
